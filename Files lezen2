@@ -1,0 +1,8 @@
+file = open('kaartnummers.txt', 'r')
+namen = file.readlines()
+kaartnummers = []
+for kaart in namen:
+    kaartsplit = kaart.split(", ")
+    kaartnummers.append(int(kaartsplit[0]))
+
+print('Deze file telt {} regels\nHet grootste kaartnummer is: {} en dat staat op regel {}'.format(len(namen), max(kaartnummers), kaartnummers.index(max(kaartnummers))+1))

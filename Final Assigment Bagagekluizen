@@ -1,0 +1,90 @@
+# TEXT BOX IPV PRINT()
+def scherm(input):
+    print("\n\n[]{0}[]\n|| {1:50} ||\n[]{2}[]\n\n".format('-'*52, input, '-'*52))
+
+# OPTIE 1
+def toon_aantal_kluizen_vrij():
+    leesfile = open("kluizen.txt", 'r')
+    aantallijnen = leesfile.readlines()
+    scherm("Er zijn {} kluizen vrij.".format(12 - len(aantallijnen)))
+
+# OPTIE 2
+def nieuwe_kluis():
+    leesfile = open("kluizen.txt", 'r')
+    allelijnen = leesfile.readlines()
+    if len(allelijnen) == 12:
+        scherm("Er zijn geen kluizen meer over")
+    else:
+        vrijekluis = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        for line in allelijnen:
+            kluis = line.split(";")
+            kluisnummer = int(kluis[0])
+            vrijekluis.remove(kluisnummer)
+        eerstevrijekluis = min(vrijekluis)
+        schrijffile = open('kluizen.txt', 'a')
+        wachtwoord = input("Voer een wachtwoord in voor je kluis: ")
+        schrijffile.write("{};{}\n".format(eerstevrijekluis, wachtwoord))
+        schrijffile.close()
+        scherm("Jouw kluis nummer is {}".format(eerstevrijekluis))
+
+# OPTIE 3
+def kluis_openen():
+    'Opent het kluisje'
+    leesfile = open("kluizen.txt", 'r')
+    kluisnummer = input("Uw kluisnummer: ")
+    wachtwoord = input("Uw wachtwoord: ")
+    allelijnen = leesfile.readlines()
+    checkinfo = False
+    for line in allelijnen:
+        info = line.split(";")
+        if kluisnummer == info[0] and wachtwoord == info[1].rstrip():
+            checkinfo = True
+            break
+    if checkinfo:
+        scherm("U heeft uw kluis open gemaakt")
+    else:
+        scherm("Uw kluisnummer of kluiswachtwoord kwam niet overeen")
+
+# OPTIE 4
+def kluis_teruggeven():
+    leesfile = open("kluizen.txt", 'r')
+    kluisnummer = input("Uw kluisnummer: ")
+    wachtwoord = input("Uw wachtwoord: ")
+    allelijnen = leesfile.readlines()
+    checkinfo = False
+    for line in allelijnen:
+        info = line.split(";")
+        if kluisnummer == info[0] and wachtwoord == info[1].rstrip():
+            allelijnen.remove(line)
+            checkinfo = True
+            break
+    if checkinfo:
+        scherm("Uw kluis is vrijgegeven")
+        writefile = open('kluizen.txt', 'w')
+        nieuwfile = ""
+        for line in allelijnen:
+            nieuwfile += line
+        writefile.write(nieuwfile)
+        writefile.close()
+    else:
+        scherm("Uw kluisnummer of kluiswachtwoord kwam niet overeen")
+
+while True:
+    print("1. Ik wil weten hoeveel kluizen nog vrij zijn",
+          "2. Ik wil een nieuwe kluis",
+          "3. Ik wil even iets uit mijn kluis halen",
+          "4. Ik geef mijn kluis terug",
+          "5. Ik wil stoppen",
+          "",
+          sep="\n")
+    keuzen = int(input("selecteer een optie: "))
+    if keuzen == 1:
+        toon_aantal_kluizen_vrij()
+    elif keuzen == 2:
+        nieuwe_kluis()
+    elif keuzen == 3:
+        kluis_openen()
+    elif keuzen == 4:
+        kluis_teruggeven()
+    elif keuzen == 5:
+        break

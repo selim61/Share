@@ -1,0 +1,8 @@
+import datetime
+def hardloper(name):
+    infile = open('hardlopers.txt', 'a')
+    vandaag = datetime.datetime.today()
+    infile.write('{}, {}, {}\n'.format(vandaag.strftime("%a %d %b %Y"), vandaag.strftime("%X"), name))
+
+Naam = input("vul hier je naam in: ")
+hardloper(Naam)
