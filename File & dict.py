@@ -7,32 +7,32 @@ def ticker(filename):
         tickerdict[values[0]] = values[1].rstrip()
     return tickerdict
 
-def tickercompany(tickername):
+def tickercompany(tickernaam):
     dict = ticker("ticker.txt")
-    companyname = ""
+    bedrijfnaam = ""
     for i in dict:
-        if dict[i] == tickername:
-            companyname = i
+        if dict[i] == tickernaam:
+            bedrijfnaam = i
             break
-    return companyname
+    return bedrijfnaam
 
-def companyticker(companynaam):
+def bedrijfticker(bedrijfnaam):
     dict = ticker("ticker.txt")
     tickernaam = ""
     for i in dict:
-        if i == companynaam:
+        if i == bedrijfnaam:
             tickernaam = dict[i]
             break
     return tickernaam
 
 while True:
-    print("1. Company to Ticker\n2. Ticker to Company")
-    keuzen = int(input("Choose an option: "))
+    print("1. Bedrijfsnaam naar Ticker\n2. Ticker naar Bedrijfsnaam")
+    keuzen = int(input("Kies een optie: "))
     if keuzen == 1:
-        cnaam = input("Enter Company name: ")
-        print("Ticker symbol: {}".format(companyticker(cnaam)))
+        cnaam = input("Voer bedrijfsnaam in: ")
+        print("Ticker symbol: {}".format(bedrijfticker(cnaam)))
     elif keuzen == 2:
-        tnaam = input("Enter Ticker symbol: ")
-        print("Company name: {}".format(tickercompany(tnaam)))
+        tnaam = input("Voer Ticker symbol in: ")
+        print("bedrijf naam: {}".format(tickercompany(tnaam)))
     else:
         break
