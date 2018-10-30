@@ -1,0 +1,19 @@
+import random
+
+def monopolyworp():
+    werp = 0
+    while True:
+        werp += 1
+        dobelsteen1 = random.randrange(1,7)
+        dobelsteen2 = random.randrange(1,7)
+        if dobelsteen1 == dobelsteen2:
+            if werp < 3:
+                print("{} + {} = {} (dubbel)".format(dobelsteen1, dobelsteen2, dobelsteen1 + dobelsteen2))
+            else:
+                print("{} + {} = (direct naar gevangenis)".format(dobelsteen1, dobelsteen2))
+                break
+        else:
+            print("{} + {} = {}".format(dobelsteen1, dobelsteen2, dobelsteen1 + dobelsteen2))
+            break
+
+monopolyworp()
